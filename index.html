@@ -26,10 +26,16 @@
 			margin-left: 40px;
 		}
 		
-		label {
+		label#result {
 			color: orange;
 			font-family: 'Roboto Medium', sans-serif;
-			margin-left: 10px;
+			margin-left: 40px;
+		}
+
+		label#note {
+			color: white;
+			font-family: 'Roboto Medium', sans-serif;
+			margin-left: 40px;
 		}
 		
 		button, input {
@@ -41,6 +47,7 @@
 <body>
 	<div id="content" />
 	<div id="footer">
+		<label id="note">Subscribe to household notifications.</label>
 		<input id="phone-number" placeholder="612-555-1212" />
 		<button id="subscribe">Subscribe</button>
 		<button id="unsubscribe">Unsubscribe</button>
