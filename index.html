@@ -19,47 +19,78 @@
 			position:absolute;
 			bottom:0;
 			width:100%;
-			height:60px;
+			height:160px;
 		}
 		
-		input {
-			margin-left: 40px;
+		div.indent {
+			margin-left: 60px;
+			margin-bottom: 10px;
 		}
-		
+	
+		span {
+			color: cyan;
+			font-family: 'Roboto Medium', sans-serif;
+		}
+	
 		label#result {
 			color: orange;
 			font-family: 'Roboto Medium', sans-serif;
-			margin-left: 40px;
 		}
 
 		label#note {
 			color: white;
 			font-family: 'Roboto Medium', sans-serif;
-			margin-left: 40px;
 		}
 		
 		button, input {
 			width: 100px;
 			height: 30px;
 		}
+		
+		input[type="checkbox"] {
+			width: 24px;
+			height: 24px;
+			vertical-align: bottom;
+		}
+		
+		label.checkbox {
+			vertical-align: top;
+			line-height: 24px;
+			margin: 4px 0px 10px 0px;
+			display: inline;
+			height: 24px;
+			color: red;
+			font-family: 'Roboto Medium', sans-serif;		
+		}
 	</style>
 </head>
 <body>
 	<div id="content" />
 	<div id="footer">
-		<label id="note">Subscribe to household notifications.</label>
-		<input id="phone-number" placeholder="612-555-1212" />
-		<button id="subscribe">Subscribe</button>
-		<button id="unsubscribe">Unsubscribe</button>
-		<label id="result"></label>
+		<div class="indent">
+			<label id="note">Subscribe to household notifications.</label>
+		</div>
+		<div class="indent">
+			<input id="phone-number" placeholder="612-555-1212" />
+			<label class="checkbox"><input type="checkbox" id="opt-in" />
+				I consent to receiving text messages.
+			</label>
+		</div>
+		<div class="indent">
+			<button id="subscribe" disabled>Subscribe</button>
+			<button id="unsubscribe">Unsubscribe</button>
+			<label id="result"></label>
+		</div>
 	</div>
 </body>
 
 <script>
-	let subscribebutton = document.querySelector('#subscribe');
-	let unsubscribebutton = document.querySelector('#unsubscribe');
+	let subscribeButton = document.querySelector('#subscribe');
+	let unsubscribeButton = document.querySelector('#unsubscribe');
 	let resultLabel = document.querySelector('#result');
 	let phoneNumber = document.querySelector('#phone-number');
+	let optInCheckbox = document.querySelector('#opt-in');
+	let optInChecked = false;
 	
 	function handleSubscribe(e) {
 		if (phoneNumber.value.trim() === "") {
@@ -76,7 +107,18 @@
 		resultLabel.innerHTML = "You have been unsubscribed from all texts";
 	}
 	
-	subscribebutton.addEventListener('click', handleSubscribe);
-	unsubscribebutton.addEventListener('click', handleUnsubscribe);
+	
+	function toggleSubscribe(e) {
+		optInChecked = !optInChecked;
+		if (optInChecked) {
+			subscribeButton.removeAttribute('disabled');
+		} else {
+			subscribeButton.setAttribute('disabled', '');
+		}
+	}
+	
+	subscribeButton.addEventListener('click', handleSubscribe);
+	unsubscribeButton.addEventListener('click', handleUnsubscribe);
+	optInCheckbox.addEventListener('click', toggleSubscribe);
 </script>
 </html>
