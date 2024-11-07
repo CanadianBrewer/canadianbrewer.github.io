@@ -1,12 +1,75 @@
 <html>
 <head>
 	<style>
-	body {
-		background-image: url('canadian-brewer.png');
-		background-repeat: no-repeat;
-		background-attachemnt: fixed;
-		background-size: 100% 100%;
-	}
+		body {
+			margin:0;
+			padding:0;
+			height:100%;
+			background-image: url('canadian-brewer.png');
+			background-repeat: no-repeat;
+			background-attachemnt: fixed;
+			background-size: 100% 100%;
+		}
+
+		#content {
+			height: 0px; /* Changed this height */
+			padding-bottom:0px;
+		}
+		#footer {
+			position:absolute;
+			bottom:0;
+			width:100%;
+			height:60px;
+		}
+		
+		input {
+			margin-left: 40px;
+		}
+		
+		label {
+			color: orange;
+			font-family: 'Roboto Medium', sans-serif;
+			margin-left: 10px;
+		}
+		
+		button, input {
+			width: 100px;
+			height: 30px;
+		}
 	</style>
 </head>
+<body>
+	<div id="content" />
+	<div id="footer">
+		<input id="phone-number" placeholder="612-555-1212" />
+		<button id="subscribe">Subscribe</button>
+		<button id="unsubscribe">Unsubscribe</button>
+		<label id="result"></label>
+	</div>
+</body>
+
+<script>
+	let subscribebutton = document.querySelector('#subscribe');
+	let unsubscribebutton = document.querySelector('#unsubscribe');
+	let resultLabel = document.querySelector('#result');
+	let phoneNumber = document.querySelector('#phone-number');
+	
+	function handleSubscribe(e) {
+		if (phoneNumber.value.trim() === "") {
+			return;
+		}
+		
+		resultLabel.innerHTML = "You have been subscribed";
+	}
+	
+	function handleUnsubscribe(e) {
+		if (phoneNumber.value.trim() === "") {
+			return;
+		}
+		resultLabel.innerHTML = "You have been unsubscribed from all texts";
+	}
+	
+	subscribebutton.addEventListener('click', handleSubscribe);
+	unsubscribebutton.addEventListener('click', handleUnsubscribe);
+</script>
 </html>
